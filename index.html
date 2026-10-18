@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Happy Birthday Pooja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Baloo+2:wght@400;600;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2A1A55;--soft:#5B4A8A;--pink:#FF4F8B;--pinkSoft:#FFB3CF;--btn:#E23D7B;--btnS:#A9235A;--gold:#FFB627}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;font-family:'Baloo 2','Segoe UI',sans-serif;color:var(--ink)}
+h1,h2,p{margin:0}
+.screen{position:fixed;inset:0;display:none;overflow:hidden}
+.screen.active{display:flex;animation:screenIn .8s ease}
+@keyframes screenIn{from{opacity:0}to{opacity:1}}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+
+/* shared button */
+.btn{font-family:inherit;font-weight:800;font-size:19px;padding:12px 28px;margin:10px;border:0;border-radius:999px;background:var(--btn);color:#fff;cursor:pointer;position:relative;z-index:2;box-shadow:0 6px 0 var(--btnS),0 14px 26px rgba(226,61,123,.32);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--btnS)}
+h2.t{font:400 clamp(26px,7.2vw,38px)/1.15 'Bagel Fat One',system-ui,sans-serif}
+
+/* ---------- SCREEN 1 : page 1 + memories ---------- */
+#s1{display:none;overflow-y:auto;scroll-behavior:smooth;background:#FFE7D3}
+#s1.active{display:block}
+#page1{position:relative;min-height:100vh;background:linear-gradient(165deg,#FFE7D3,#FFC9E0);display:flex;justify-content:center;align-items:center;padding:20px;overflow:hidden}
+.spark{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:#FF9F1C;opacity:.05;animation:twinkle var(--d) ease-in-out var(--dl) infinite}
+@keyframes twinkle{0%,100%{opacity:.05;transform:scale(.6)}50%{opacity:.85;transform:scale(1.25)}}
+.inner{position:relative;width:100%;max-width:520px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.bunting{width:100%;margin-bottom:8px}
+.brow{position:relative;display:flex;margin:0 auto 20px;--sag:16px}
+.brow.happy{width:62.5%}
+.brow svg{position:absolute;left:0;top:0;width:100%;height:var(--sag);overflow:visible}
+.brow svg path{fill:none;stroke:var(--soft);stroke-width:2.5;vector-effect:non-scaling-stroke;opacity:.7}
+.flag{flex:1;min-width:0;margin-top:var(--y);animation:drop .9s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i)*60ms + 200ms)}
+.cloth{display:grid;place-items:start center;padding-top:14%;width:calc(100% - 4px);margin:0 auto;aspect-ratio:1/1.15;clip-path:polygon(0 0,100% 0,50% 100%);background:var(--c);color:#2A1A55;font:400 clamp(16px,5.4vw,30px)/1 'Bagel Fat One',system-ui,sans-serif;transform-origin:50% 0;animation:swing 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*-350ms)}
+@keyframes drop{from{transform:translateY(-160px);opacity:0}to{transform:none;opacity:1}}
+@keyframes swing{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+.late{opacity:0;animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--dl,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.name{position:relative;font:700 clamp(64px,22vw,120px)/1.05 'Caveat','Segoe Script',cursive;padding:0 .12em;opacity:0;animation:namepop .9s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:1.5s}
+.name span{background:linear-gradient(100deg,#FF4F8B,#FFB627,#6C4CF1,#FF4F8B);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shimmer 5s linear infinite;filter:drop-shadow(0 4px 0 rgba(42,26,85,.12))}
+.name::after{content:'';position:absolute;left:10%;right:10%;bottom:4px;height:10px;border-radius:99px;background:var(--pinkSoft);opacity:.7;z-index:-1;transform:rotate(-1.5deg)}
+@keyframes shimmer{to{background-position:300% 0}}
+@keyframes namepop{from{opacity:0;transform:scale(.55) rotate(-5deg)}to{opacity:1;transform:none}}
+.sub{font-weight:600;font-size:clamp(18px,5vw,22px);color:var(--soft)}
+
+#memories{background:linear-gradient(to right,#ffdde1,#ee9ca7);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px}
+#memories h2{font:400 32px 'Bagel Fat One',sans-serif;color:#d63384;margin:0 0 30px}
+.slide{width:130px;height:90px;object-fit:cover;border-radius:12px;cursor:pointer;opacity:.3;transition:all .5s ease}
+.slide.active{width:200px!important;height:300px!important;opacity:1;z-index:1}
+#message{font-size:18px;color:#444;text-align:center;min-height:30px;margin-top:20px}
+#slideshow{display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
+
+/* ---------- SCREEN 3 : cake ---------- */
+#s3{background:linear-gradient(165deg,#FFE7D3,#FFC9E0);flex-direction:column;align-items:center;justify-content:safe center;text-align:center;padding:20px;overflow-y:auto}
+#s3 h2{color:var(--ink);margin-bottom:6px}
+.cake{width:min(340px,86vw);height:auto;overflow:visible;margin:4px 0}
+.hint{font-size:17px;color:var(--soft);min-height:26px}
+.candle{cursor:pointer}.candle .hit{fill:transparent}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .45s ease-in-out infinite alternate;transition:transform .35s,opacity .35s}
+.halo{animation:halo 1.2s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.93,1.09) rotate(3deg)}}
+@keyframes halo{from{opacity:.7}to{opacity:1}}
+.candle.out .flame{animation:none;opacity:0;transform:scale(.15)}
+.candle.out .halo{animation:none;opacity:0}
+.smoke{opacity:0;transform-box:fill-box}
+.candle.out .smoke{animation:smoke 1.8s ease-out forwards}
+@keyframes smoke{0%{opacity:.85;transform:translateY(0) scaleY(.7)}100%{opacity:0;transform:translateY(-26px) scaleY(1.2)}}
+#nextBtn{display:none}
+
+/* ---------- SCREEN 4 : lights ---------- */
+#s4{background:#111;color:#fff;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:background-color 1.5s ease,color 1s ease}
+#s4.light-on{background:#fffbe6;color:#333}
+.star-container{position:absolute;inset:0;z-index:0;transition:opacity 1.5s ease}
+.star{position:absolute;background:#fff;animation:twinkle2 4s infinite ease-in-out;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+@keyframes twinkle2{0%{opacity:0;transform:scale(.5)}50%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.5)}}
+.bulb{position:relative;z-index:1;font-size:72px;filter:grayscale(1) brightness(.6);animation:bob 3s ease-in-out infinite;transition:filter 1s}
+#s4.light-on .bulb{filter:drop-shadow(0 0 25px #ffd54a)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#text{position:relative;z-index:1;font:400 36px 'Bagel Fat One',sans-serif;margin:10px 0 24px}
+
+/* ---------- SCREEN 5 : letter ---------- */
+#s5{background:linear-gradient(165deg,#FFE7D3,#FFC9E0);flex-direction:column;align-items:center;padding:30px 20px;overflow-y:auto}
+#s5 .inner{z-index:1}
+.falling-container{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.falling-item{position:absolute;background-size:contain;background-repeat:no-repeat;animation:fall linear infinite}
+.falling-item.leaf{background-image:url('raw/golden_maple_leaves.png')}
+.falling-item.yellow-flower{background-image:url('raw/yellow_flower.png')}
+.falling-item.pink-flower{background-image:url('raw/pink_flower.png')}
+@keyframes fall{0%{transform:translate(0,-100px) rotate(0);opacity:.9}100%{transform:translate(var(--dx),105vh) rotate(360deg);opacity:.1}}
+.env{position:relative;width:min(300px,80vw);height:200px;margin-top:84px;cursor:pointer;animation:bobenv 3s ease-in-out infinite;transition:opacity .45s,transform .45s}
+.env.gone{opacity:0;transform:scale(.9)}
+@keyframes bobenv{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.env .back{position:absolute;inset:0;background:#F4A9C0;border-radius:8px;z-index:0}
+.env .paper{position:absolute;left:8%;right:8%;top:8%;height:80%;background:#FFFDF6;border-radius:4px;z-index:1;transition:transform .8s cubic-bezier(.3,1.2,.4,1) .5s}
+.env .front{position:absolute;inset:0;background:#FF8FB1;border-radius:0 0 8px 8px;clip-path:polygon(0 100%,0 30%,50% 64%,100% 30%,100% 100%);z-index:2}
+.env .seal{position:absolute;left:50%;top:70%;transform:translate(-50%,-50%);color:#fff;font-size:28px;z-index:4;line-height:1}
+.env .flap{position:absolute;top:0;left:0;width:100%;height:64%;background:#FF7AA8;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;z-index:3;transition:transform .6s ease,z-index 0s .3s}
+.env.open{animation:none}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.env.open .paper{transform:translateY(-58%)}
+.env.open .seal{opacity:0}
+.letter{width:100%;max-width:460px;text-align:left;background-color:#FFFDF6;color:#3A2A66;border-radius:6px;border-left:4px solid #FF9EBB;padding:22px 20px 12px 24px;font-family:'Caveat','Segoe Script',cursive;font-size:clamp(22px,5.8vw,26px);line-height:34px;background-image:repeating-linear-gradient(to bottom,transparent 0 33px,rgba(108,76,241,.17) 33px 34px);background-position:0 22px;box-shadow:0 18px 40px rgba(42,26,85,.28)}
+.letter p{margin:0 0 34px}
+.letter .hello{font-size:1.3em;font-weight:700}
+.letter .sign{text-align:right;font-size:1.4em;margin-bottom:12px}
+.letter .line{opacity:0;transform:translateY(10px)}
+.letter.show .line{animation:lineIn .9s ease forwards;animation-delay:calc(var(--n)*.9s)}
+.letter.instant .line{animation-duration:.01s!important;animation-delay:0s!important}
+@keyframes lineIn{to{opacity:1;transform:none}}
+[hidden]{display:none!important}
+@media (max-width:500px){#text{font-size:28px}}
+</style>
+</head>
+<body>
+
+<!-- Background music: ek hi baar load hoga, pages badalne par band nahi hoga -->
+<iframe src="raw/audio.html" allow="autoplay" style="display:none;" id="bgFrame"></iframe>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<!-- ================= PAGE 1 + 2 ================= -->
+<div id="s1" class="screen active">
+  <section id="page1">
+    <div class="inner">
+      <div class="bunting" role="img" aria-label="Happy Birthday">
+        <div class="brow happy" id="rowHappy"></div>
+        <div class="brow bday" id="rowBday"></div>
+      </div>
+      <h1 class="name"><span>Pooja</span></h1>
+      <p class="sub late" style="--dl:1.9s">Aaj ka din sirf tumhare Naam</p>
+      <button class="btn late" style="--dl:2.1s" onclick="document.getElementById('memories').scrollIntoView({behavior:'smooth'})">Begin Your Surprise 🎁</button>
+    </div>
+  </section>
+
+  <section id="memories">
+    <h2>Sweet Memories</h2>
+    <div id="slideshow">
+      <img src="raw/photo1.jpg" class="slide" onclick="showSlide(0)" />
+      <img src="raw/photo2.jpg" class="slide" onclick="showSlide(1)" />
+      <img src="raw/photo3.jpg" class="slide" onclick="showSlide(2)" />
+      <img src="raw/photo4.jpg" class="slide" onclick="showSlide(3)" />
+    </div>
+    <div id="message"></div>
+    <button class="btn" onclick="goTo(3)">Click to Next Page 🚀</button>
+  </section>
+</div>
+
+<!-- ================= PAGE 3 (cake) ================= -->
+<div id="s3" class="screen">
+  <h2 class="t">Let’s Celebrate</h2>
+  <p class="hint" id="cakeHint"></p>
+  <svg class="cake" id="cake" viewBox="0 0 320 300" role="group" aria-label="Birthday cake with five candles"></svg>
+  <button class="btn" id="blowBtn">Phoonk maaro 💨</button>
+  <button class="btn" id="nextBtn" onclick="goTo(4)">Go to next page 🚀</button>
+</div>
+
+<!-- ================= PAGE 4 (lights) ================= -->
+<div id="s4" class="screen">
+  <div id="star-container" class="star-container"></div>
+  <div class="bulb">💡</div>
+  <h1 id="text">Light up with light</h1>
+  <button class="btn" onclick="turnLightsOn()">Turn the lights on</button>
+</div>
+
+<!-- ================= PAGE 5 (letter) ================= -->
+<div id="s5" class="screen">
+  <div id="falling-container" class="falling-container"></div>
+  <div class="inner">
+    <h2 class="t">Tumhare liye ek khat 💌</h2>
+    <div class="env" id="env" role="button" tabindex="0" aria-label="Khat kholo">
+      <div class="back"></div><div class="paper"></div><div class="front"></div><div class="seal">♥</div><div class="flap"></div>
+    </div>
+    <button class="btn" id="openBtn">Khat kholo</button>
+    <article class="letter" id="letter" hidden>
+      <p class="hello line" style="--n:0">Dear Pooja,</p>
+      <p class="line" style="--n:1">Janamdin bahut bahut mubarak ho! 🎉</p>
+      <p class="line" style="--n:2">Aaj ka din sirf tumhara hai. Tum jaise ho, bilkul waise hi bahut khaas ho. Tumhari muskurahat, tumhari baatein aur tumhara saath har din ko thoda aur khubsurat bana deta hai.</p>
+      <p class="line" style="--n:3">Meri dua hai ki aane wala saal tumhare liye khushiyon se bhara ho. Jo sapne tumne dekhe hain wo poore hon, aur tumhare chehre se muskurahat kabhi kam na ho.</p>
+      <p class="line" style="--n:4">Tum kitne bhi bade ho jao, dil se hamesha aise hi rehna. Zindagi ka har pal tumhare liye khaas ho.</p>
+      <p class="line" style="--n:5">Bahut saara pyaar aur dher saari shubhkamnayein! 🎂</p>
+      <p class="sign line" style="--n:6">Happy Birthday Pooja 🎂💛</p>
+    </article>
+  </div>
+</div>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* ---------- Page navigation ---------- */
+function goTo(n) {
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $(n === 1 ? '#s1' : '#s' + n).classList.add('active');
+}
+
+/* ---------- Confetti engine ---------- */
+const cv = $('#fx'), cx = cv.getContext('2d');
+let W = 0, H = 0, parts = [], running = false;
+function size() { const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+addEventListener('resize', size); size();
+const CONF = ['#FFB627', '#FF4F8B', '#19B99A', '#6C4CF1', '#FF7A45', '#6EC8FF', '#FFFFFF'];
+function burst(x, y, o = {}) {
+  const base = o.angle !== undefined ? o.angle : -Math.PI / 2, spread = o.spread !== undefined ? o.spread : Math.PI * 2, cols = o.colors || CONF;
+  for (let i = 0; i < (o.n || 90); i++) {
+    const a = base + (Math.random() - .5) * spread, v = (o.power || 9) * (.4 + Math.random() * .8);
+    parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, w: 5 + Math.random() * 6, h: 3 + Math.random() * 5, r: Math.random() * 6.28, vr: (Math.random() - .5) * .35, c: cols[i % cols.length], round: Math.random() < .3, life: 1, decay: .006 + Math.random() * .006 });
+  }
+  if (!running) { running = true; requestAnimationFrame(tick); }
+}
+function tick() {
+  cx.clearRect(0, 0, W, H);
+  parts = parts.filter(p => p.life > 0 && p.y < H + 30);
+  for (const p of parts) {
+    p.vx *= .985; p.vy = p.vy * .985 + .22; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life -= p.decay;
+    cx.save(); cx.globalAlpha = Math.max(0, Math.min(1, p.life * 2)); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
+    if (p.round) { cx.beginPath(); cx.arc(0, 0, p.w / 2.2, 0, 6.29); cx.fill(); }
+    else { cx.scale(1, Math.abs(Math.cos(p.r * .7)) + .2); cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+    cx.restore();
+  }
+  if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, W, H); }
+}
+
+/* ---------- Page 1 : sparkles + bunting ---------- */
+for (let i = 0; i < 36; i++) {
+  const s = document.createElement('i'); s.className = 'spark';
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--s:${(2+Math.random()*4).toFixed(1)}px;--d:${(2+Math.random()*4).toFixed(1)}s;--dl:${(-Math.random()*5).toFixed(1)}s`;
+  $('#page1').appendChild(s);
+}
+function bunting(el, text, offset) {
+  const n = text.length, sag = 16, cols = ['#FF7AA8', '#FFC94D', '#4FD8B8', '#A794FF', '#FF9F6B'];
+  el.innerHTML = '<svg viewBox="0 0 100 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 Q50,32 100,0"/></svg>';
+  [...text].forEach((ch, i) => {
+    const t = (i + .5) / n, y = 4 * t * (1 - t) * sag, f = document.createElement('div');
+    f.className = 'flag'; f.setAttribute('aria-hidden', 'true');
+    f.style.cssText = `--y:${y.toFixed(1)}px;--i:${i + offset};--c:${cols[(i + offset) % cols.length]}`;
+    f.innerHTML = `<span class="cloth">${ch}</span>`;
+    el.appendChild(f);
+  });
+}
+bunting($('#rowHappy'), 'HAPPY', 0);
+bunting($('#rowBday'), 'BIRTHDAY', 5);
+
+/* ---------- Page 2 : memories ---------- */
+const messages = [
+  "That smile, unforgettable.",
+  "When the Moon glows, it shines just like you",
+  "Bholi Si Surat Aankho mai Masti, Ayeee Hayeee...",
+  "A rose could never be more beautiful than you. 🌹"
+];
+const slides = $$('.slide'), messageEl = $('#message');
+let typer;
+function showSlide(index) {
+  slides.forEach((slide, i) => { slide.classList.remove('active'); slide.style.opacity = (i === index) ? '1' : '0.2'; slide.style.width = '130px'; slide.style.height = '90px'; });
+  slides[index].classList.add('active');
+  slides[index].style.opacity = '1'; slides[index].style.width = '300px'; slides[index].style.height = '200px';
+  typeMessage(messages[index]);
+}
+function typeMessage(text) {
+  clearInterval(typer); messageEl.textContent = ""; let i = 0;
+  typer = setInterval(() => { if (i < text.length) { messageEl.textContent += text.charAt(i); i++; } else clearInterval(typer); }, 50);
+}
+addEventListener("load", () => showSlide(0));
+
+/* ---------- Page 3 : cake ---------- */
+const cake = $('#cake'), blowBtn = $('#blowBtn'); let cakeDone = false;
+(function buildCake() {
+  const layers = [
+    { x: 38, y: 190, w: 244, h: 76, c: '#FF6F9C', fr: '#FFFDF6', dot: '#FFFDF6' },
+    { x: 66, y: 134, w: 188, h: 56, c: '#FFF0D9', fr: '#FF9EBB', dot: '#FF9EBB' },
+    { x: 96, y: 86, w: 128, h: 48, c: '#8B4A34', fr: '#FFFDF6', dot: '#FFD9A8' }
+  ];
+  let h = '<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFD36B" stop-opacity=".85"/><stop offset="1" stop-color="#FFD36B" stop-opacity="0"/></radialGradient></defs>';
+  h += '<ellipse cx="160" cy="268" rx="148" ry="17" fill="#DCD3F3"/><ellipse cx="160" cy="264" rx="148" ry="15" fill="#F6F2FF"/>';
+  layers.forEach(L => {
+    h += `<rect x="${L.x}" y="${L.y}" width="${L.w}" height="${L.h}" rx="12" fill="${L.c}"/>`;
+    const step = 22, cnt = Math.floor(L.w / step), sx0 = L.x + (L.w - cnt * step) / 2 + step / 2;
+    for (let i = 0; i < cnt - 1; i++) h += `<circle cx="${sx0 + step / 2 + i * step}" cy="${L.y + L.h * .62 + (i % 2) * 9}" r="3" fill="${L.dot}" opacity=".9"/>`;
+    h += `<rect x="${L.x}" y="${L.y - 3}" width="${L.w}" height="10" rx="5" fill="${L.fr}"/>`;
+    for (let i = 0; i < cnt; i++) h += `<rect x="${sx0 + i * step - 6}" y="${L.y}" width="12" height="${10 + ((i * 7) % 3) * 9}" rx="6" fill="${L.fr}"/>`;
+  });
+  const xs = [118, 139, 160, 181, 202], cc = ['#FFC94D', '#4FD8B8', '#FF9EBB', '#A794FF', '#FFC94D'];
+  xs.forEach((x, i) => {
+    h += `<g class="candle" tabindex="0" role="button" aria-label="Candle ${i + 1}">
+      <rect class="hit" x="${x - 16}" y="14" width="32" height="76"/>
+      <rect x="${x - 4.5}" y="50" width="9" height="40" rx="2" fill="${cc[i]}"/>
+      <rect x="${x - 1.5}" y="54" width="2.5" height="32" fill="#fff" opacity=".5"/>
+      <line x1="${x}" y1="50" x2="${x}" y2="46" stroke="#4a3a3a" stroke-width="1.6"/>
+      <g transform="translate(${x},46)">
+        <path class="smoke" d="M0,-4 C-6,-12 6,-18 0,-28" fill="none" stroke="#B9AEE0" stroke-width="2" stroke-linecap="round"/>
+        <g class="flame"><circle class="halo" r="17" cy="-12" fill="url(#glow)"/>
+          <path d="M0,0 C-6.5,-8 -4,-16 0,-25 C4,-16 6.5,-8 0,0Z" fill="#FFB627"/>
+          <path d="M0,0 C-3,-4 -2,-9 0,-14 C2,-9 3,-4 0,0Z" fill="#FF6A3D"/></g>
+      </g></g>`;
+  });
+  cake.innerHTML = h;
+  $$('.candle', cake).forEach(c => {
+    c.addEventListener('click', () => snuff(c));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); snuff(c); } });
+  });
+})();
+function snuff(c) {
+  if (c.classList.contains('out')) return;
+  c.classList.add('out');
+  if (!cakeDone && $$('.candle', cake).every(x => x.classList.contains('out'))) allOut();
+}
+function allOut() {
+  cakeDone = true;
+  $('#cakeHint').textContent = '';
+  blowBtn.style.display = 'none';
+  const r = cake.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height * .3, { n: 130, spread: Math.PI * 1.1, power: 11 });
+  burst(0, H, { n: 60, angle: -Math.PI / 3, spread: .8, power: 15 });
+  burst(W, H, { n: 60, angle: -2 * Math.PI / 3, spread: .8, power: 15 });
+  setTimeout(() => { $('#nextBtn').style.display = 'inline-block'; }, 1500);
+}
+blowBtn.addEventListener('click', () => $$('.candle', cake).forEach((c, i) => setTimeout(() => snuff(c), i * 130)));
+
+/* ---------- Page 4 : lights ---------- */
+const clickSound = new Audio('raw/click.mp3');
+(function createStars() {
+  const box = $('#star-container');
+  for (let i = 0; i < 100; i++) {
+    const star = document.createElement('div'), sz = 5 + Math.random() * 5;
+    star.className = 'star';
+    star.style.cssText = `left:${Math.random()*100}vw;top:${Math.random()*100}vh;width:${sz}px;height:${sz}px;animation-delay:${Math.random()*4}s`;
+    box.appendChild(star);
+  }
+})();
+function turnLightsOn() {
+  clickSound.play().catch(() => {});
+  $('#s4').classList.add('light-on');
+  $('#text').textContent = "Lights On ✨";
+  $('#star-container').style.opacity = '0';
+  burst(W / 2, H * .4, { n: 90, power: 10 });
+  setTimeout(() => goTo(5), 3500);
+}
+
+/* ---------- Page 5 : letter + falling flowers ---------- */
+const env = $('#env'), openBtn = $('#openBtn'), letter = $('#letter');
+function openLetter() {
+  if (env.classList.contains('open')) return;
+  env.classList.add('open'); openBtn.hidden = true;
+  setTimeout(() => {
+    env.classList.add('gone');
+    setTimeout(() => {
+      env.hidden = true; letter.hidden = false;
+      requestAnimationFrame(() => letter.classList.add('show'));
+      $('#s5').scrollTop = 0;
+      burst(W / 2, H * .35, { n: 50, power: 8, colors: ['#FF7AA8', '#FFC94D', '#FFFFFF'] });
+      createFallingItems();
+    }, 450);
+  }, 1300);
+}
+env.addEventListener('click', openLetter);
+env.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLetter(); } });
+openBtn.addEventListener('click', openLetter);
+letter.addEventListener('click', () => letter.classList.add('instant'));
+
+let fallingDone = false;
+function createFallingItems() {
+  if (fallingDone) return; fallingDone = true;
+  const box = $('#falling-container');
+  const types = [{ type: 'leaf', min: 30, max: 50 }, { type: 'yellow-flower', min: 40, max: 60 }, { type: 'pink-flower', min: 40, max: 60 }];
+  for (let i = 0; i < 60; i++) {
+    const item = document.createElement('div'), t = types[Math.floor(Math.random() * types.length)];
+    const sz = t.min + Math.random() * (t.max - t.min);
+    const left = Math.random() < .5 ? Math.random() * 24 : 76 + Math.random() * 24; /* left & right sides */
+    item.className = 'falling-item ' + t.type;
+    item.style.cssText = `width:${sz}px;height:${sz}px;left:${left}vw;top:-${Math.random()*200}px;--dx:${(Math.random()*80-40).toFixed(0)}px;animation-duration:${7+Math.random()*8}s;animation-delay:-${Math.random()*15}s`;
+    box.appendChild(item);
+  }
+}
+</script>
+</body>
+</html>
